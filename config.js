@@ -8,7 +8,7 @@ module.exports = {
     {
       type: "http",
       config: {
-        port: 8001,
+        port: 8000,
         staticDir: path.join(__dirname, "pages")
       }
     },
@@ -21,7 +21,7 @@ module.exports = {
     {
       type: "websockets",
       config: {
-        port: 8001,
+        port: 8000,
         maxSockets: 50
       }
     }

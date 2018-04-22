@@ -1,5 +1,5 @@
 #!/bin/bash
 
-hyper stop soundworks-test-patch
-hyper rm soundworks-test-patch
-hyper rmi tatecarson/soundworks-test-patch
+hyper stop dice-game
+hyper rm dice-game
+hyper rmi tatecarson/dice-game

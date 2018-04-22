@@ -14,29 +14,24 @@ client.start(err => {
 //ask for current list
 client.on("connected", () => {
   client.send("/getGlyphsList", ["/"]);
-  console.log("connected");
 });
 
 //send current list when asked
 client.on("message", addr => {
   if (addr == "/getGlyphsList" && pickedGlyphs.includes(1)) {
     client.send("/receiveGlyphsList", pickedGlyphs);
-    console.log("receivedglpyhslist");
   }
-  // console.log(pickedGlyphs.includes(1));
 });
 
-//recieved list, update current list
+//received list, update current list
 client.on("message", (addr, args) => {
   if (addr == "/receiveGlyphsList") {
-    //TODO: use args to update pickedGlyphs array with 1s  from args
     args.forEach((value, index) => {
       if (args[index] == 1) {
         pickedGlyphs[index] = 1;
         images[index].classList.add("picked");
       }
     });
-    console.log(args);
   }
 });
 
@@ -60,10 +55,14 @@ client.on("message", (addr, args) => {
       images[args].classList.remove("picked");
       pickedGlyphs[args] = 0;
     }
+    //change to getting values from pickedglpys array
+    pickedGlyphs.forEach((value, index) => {
+      if (pickedGlyphs[index] == 1) {
+        pickedGlyphs[index] = 1;
+        images[index].classList.add("picked");
+      }
+    });
   }
 });
 
-StartAudioContext(Tone.context, "#start").then(function() {
-  //started
-  console.log("started");
-});
+StartAudioContext(Tone.context, "#start");
