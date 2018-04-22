@@ -1,3 +1,8 @@
+// const client = new rhizome.Client();
+// client.start(err => {
+//   client.send("/sys/subscribe", ["/"]);
+// });
+
 const feedback = new Tone.FeedbackDelay("16n", 0.5).toMaster();
 
 const bells = new Tone.Players({
@@ -44,25 +49,15 @@ for (var i = 0; i < 6; i++) {
 
 //can there be a rule that when the sound stops they roll again?
 function play() {
-  if (pickedGlyphs[0]) {
+  if (pickedGlyphs[0] && idList[0] == myId) {
     var event = new Tone.Event(function(time, pitch) {
       bells.get("bell1").start();
     }, "C2");
 
     event.set({ loop: true, loopEnd: "2n" });
     event.start().stop("+4");
-
-    //remove selected glyph if stopped
-    setInterval(() => {
-      if (event.state == "stopped" && images[0].classList[1] == "picked") {
-        //this turns it off only for
-        images[0].classList.remove("picked");
-        // client.send("/picked", [0]);
-        //TODO: how do i sent the state to the other clients?
-        // bells.get("bell1").stop();
-      }
-    }, 100);
   }
+
   if (pickedGlyphs[1]) {
     var event = new Tone.Event(function(time, pitch) {
       bells.get("bell2").start();

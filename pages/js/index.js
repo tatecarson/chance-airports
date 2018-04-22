@@ -2,7 +2,8 @@ const client = new rhizome.Client();
 const images = document.querySelector(".grids").children;
 const events = [];
 const pickedGlyphs = Array(20);
-
+let myId = null;
+const idList = Array(20);
 //if array doesn't include 1 fill it with 0s
 !pickedGlyphs.includes(1) ? pickedGlyphs.fill(0) : "";
 
@@ -13,6 +14,7 @@ client.start(err => {
 
 //ask for current list
 client.on("connected", () => {
+  myId = client.id;
   client.send("/getGlyphsList", ["/"]);
 });
 
@@ -42,6 +44,9 @@ for (let i = 0; i < 20; i++) {
     //send message and do class stuff when received
     //there has to be a better way to do this?
     client.send("/picked", [i]);
+
+    //add me so i know i exist
+    idList[i] = myId;
   });
 }
 
@@ -54,7 +59,9 @@ client.on("message", (addr, args) => {
     } else {
       images[args].classList.remove("picked");
       pickedGlyphs[args] = 0;
+      idList[args] = 0;
     }
+
     //change to getting values from pickedglpys array
     pickedGlyphs.forEach((value, index) => {
       if (pickedGlyphs[index] == 1) {
@@ -65,4 +72,18 @@ client.on("message", (addr, args) => {
   }
 });
 
+function playAll() {
+  client.send("/playAll", [1]);
+}
+
+client.on("message", addr => {
+  if (addr == "/playAll") {
+    play();
+    //reset
+    for (let i = 0; i < 19; i++) {
+      pickedGlyphs[i] = 0;
+      images[i].classList.remove("picked");
+    }
+  }
+});
 StartAudioContext(Tone.context, "#start");
