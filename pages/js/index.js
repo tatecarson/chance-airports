@@ -1,9 +1,12 @@
+//well tuned chance music for airports? 
+
 const client = new rhizome.Client();
 const images = document.querySelector(".grids").children;
 const events = [];
 const pickedGlyphs = Array(20);
 let myId = null;
 const idList = Array(20);
+
 //if array doesn't include 1 fill it with 0s
 !pickedGlyphs.includes(1) ? pickedGlyphs.fill(0) : "";
 
@@ -80,10 +83,26 @@ client.on("message", addr => {
   if (addr == "/playAll") {
     play();
     //reset
+  }
+});
+
+function reset() {
+  client.send("/reset", [1]);
+}
+
+client.on("message", addr => {
+  if (addr == "/reset") {
     for (let i = 0; i < 19; i++) {
       pickedGlyphs[i] = 0;
       images[i].classList.remove("picked");
+
+      //if array contains an object do:
+      if (typeof loops[i] == "object") {
+        loops[i].stop();
+        loops[i].mute = true;
+      }
     }
   }
 });
-StartAudioContext(Tone.context, "#start");
+
+StartAudioContext(Tone.context, ".grids");
