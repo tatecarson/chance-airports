@@ -163,6 +163,8 @@ I have collected all of the previous commands in a bash script to deploy with on
 
 #### Deploy
 
+`_deployHyper.sh`
+
 ```bash
 #!/bin/bash
 
@@ -176,6 +178,8 @@ hyper fip attach 209.177.91.57 dice-game
 ```
 
 #### Remove
+
+`_removeHyper.sh`
 
 ```bash
 #!/bin/bash
