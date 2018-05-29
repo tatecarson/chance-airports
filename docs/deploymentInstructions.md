@@ -117,33 +117,47 @@ Now we can run a few commands to get our app running on hyper. You will notice t
 
 First we pull from DockerHub to hyper:
 
-`hyper pull tatecarson/dice-game`
+```
+hyper pull tatecarson/dice-game
+```
 
 Run the container on hyper. Below we run in detached mode, name our app on hyper and explicitly publish ports then tell hyper we want ot run the app we just pulled.
 
-`hyper run -d --name dice-game -p 8000:8000 tatecarson/dice-game`
+```
+hyper run -d --name dice-game -p 8000:8000 tatecarson/dice-game
+```
 
 To expose your app to the world you need to allocate a floating IP or `fip`. Only do this once per app as they are billed at a different rate.
 
-`hyper fip allocate 1`
+```
+hyper fip allocate 1
+```
 
 Attach that IP to your app:
 
-`hyper fip attach 209.177.91.57 dice-game`
+```
+hyper fip attach 209.177.91.57 dice-game
+```
 
 It is very easy to remove and turn off your app when it is not in use. This is very helpful to control cost.
 
 Stop the app:
 
-`hyper stop dice-game`
+```
+hyper stop dice-game
+```
 
 Remove the container
 
-`hyper rm -f dice-game`
+```
+hyper rm -f dice-game
+```
 
 Remove the image associated with the container
 
-`hyper rmi tatecarson/dice-game`
+```
+hyper rmi tatecarson/dice-game
+```
 
 I have collected all of the previous commands in a bash script to deploy with one command.
 
