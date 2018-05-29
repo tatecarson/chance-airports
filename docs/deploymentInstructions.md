@@ -121,3 +121,5 @@ docker push tatecarson/dice-game
 
 * go through general hyper commands
   * rm, rmi, pull, run, fip attach, stop
+
+test
