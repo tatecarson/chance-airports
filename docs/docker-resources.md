@@ -6,7 +6,7 @@
 
 ### docker docs
 
-* [Get Started, Part 1: Orientation and setup | Docker Documentation](https://docs.docker.com/get-started/#docker-concepts)
+* [Get Started](https://docs.docker.com/get-started/#docker-concepts)
 
 #### Docker concepts
 
@@ -35,23 +35,25 @@ By contrast, a virtual machine (VM) runs a full-blown “guest” operating syst
 
 ### Dive into docker
 
-* [Docker’s Biggest Wins - Dive Into Docker - YouTube](https://www.youtube.com/watch?v=YcqQI7jACTQ&index=2&list=PL-v3vdeWVEsXT-u0JDQZnM90feU3NE3v8)
-  _ Saving time and money (when running on a server)
-  _ very efficient use of system resources
-  _ allows isolating of development environments but shares what is common between docker containers
-  _ fast container start
-  _ portability across machines and evironments
-  _ if it runs on your machine it will run anywhere \* no issues with trying to install on a linux server that acts different than your OSX of windows machine
-* [Virtual Machines vs Docker Containers - Dive Into Docker - YouTube](https://www.youtube.com/watch?v=TvnZTi_gaNc&index=5&list=PL-v3vdeWVEsXT-u0JDQZnM90feU3NE3v8) \* docker containers
+* [Docker’s Biggest Wins](https://www.youtube.com/watch?v=YcqQI7jACTQ&index=2&list=PL-v3vdeWVEsXT-u0JDQZnM90feU3NE3v8)
+  * Saving time and money (when running on a server)
+  * very efficient use of system resources
+  * allows isolating of development environments but shares what is common between docker containers
+  * fast container start
+  * portability across machines and environments
+  * if it runs on your machine it will run anywhere
+  * no issues with trying to install on a linux server that acts different than your OSX of windows machine
+* [Virtual Machines vs Docker Containers - Dive Into Docker - YouTube](https://www.youtube.com/watch?v=TvnZTi_gaNc&index=5&list=PL-v3vdeWVEsXT-u0JDQZnM90feU3NE3v8)
+  * docker containers
 * [Visualizing Docker’s Architecture - Dive Into Docker - YouTube](https://www.youtube.com/watch?v=IxzwNa-xuIo&list=PL-v3vdeWVEsXT-u0JDQZnM90feU3NE3v8&index=7)
-  _ client
-  _ where docker commands are run
-  _ docker host
-  _ runs docker daemon
-  _ docker registry
-  _ like github for docker
-  _ hosts references to docker containers
-  _ https://hub.docker.com/
+  * client
+  * where docker commands are run
+  * docker host
+  * runs docker daemon
+  * docker registry
+  * like github for docker
+  * hosts references to docker containers
+  * https://hub.docker.com/
 
 ### Docker 101 - Introduction to docker
 
