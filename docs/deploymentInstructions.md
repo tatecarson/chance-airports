@@ -34,19 +34,7 @@ docker version
 
 Sign up for an account on hyper.sh. You get 2 months of limited service for free after adding a credit card.
 
-Download and install the [hyper CLI](https://console.hyper.sh/cli/download).
-
-If on a mac, and have brew installed, you can just run:
-
-```bash
-brew install hyper
-```
-
-Check your installation by running:
-
-```bash
-hyper version
-```
+Follow the instructions to generate an [API credential](https://docs.hyper.sh/hyper/GettingStarted/generate_api_credential.html). Then install the [CLI](https://docs.hyper.sh/hyper/GettingStarted/install.html) and configure with your API credentials.
 
 ## A look at the composition
 
@@ -111,7 +99,11 @@ docker build . -t tatecarson/dice-game
 
 ### Run locally
 
+Explain how to test locally inside docker container here
+
 ## Deploy
+
+### DockerHub
 
 Now push to DockerHub:
 
@@ -119,5 +111,62 @@ Now push to DockerHub:
 docker push tatecarson/dice-game
 ```
 
-* go through general hyper commands
-  * rm, rmi, pull, run, fip attach, stop
+### Hyper
+
+Now we can run a few commands to get our app running on hyper. You will notice that the commands are similar to GitHub's, making them easier to remember.
+
+First we pull from DockerHub to hyper:
+
+`hyper pull tatecarson/dice-game`
+
+Run the container on hyper. Below we run in detached mode, name our app on hyper and explicitly publish ports then tell hyper we want ot run the app we just pulled.
+
+`hyper run -d --name dice-game -p 8000:8000 tatecarson/dice-game`
+
+To expose your app to the world you need to allocate a floating IP or `fip`. Only do this once per app as they are billed at a different rate.
+
+`hyper fip allocate 1`
+
+Attach that IP to your app:
+
+`hyper fip attach 209.177.91.57 dice-game`
+
+It is very easy to remove and turn off your app when it is not in use. This is very helpful to control cost.
+
+Stop the app:
+
+`hyper stop dice-game`
+
+Remove the container
+
+`hyper rm -f dice-game`
+
+Remove the image associated with the container
+
+`hyper rmi tatecarson/dice-game`
+
+I have collected all of the previous commands in a bash script to deploy with one command.
+
+#### Deploy
+
+```bash
+#!/bin/bash
+
+docker build . -t tatecarson/dice-game
+docker push tatecarson/dice-game
+hyper rm -f dice-game
+hyper rmi tatecarson/dice-game
+hyper pull tatecarson/dice-game
+hyper run -d --name dice-game -p 8000:8000 tatecarson/dice-game
+hyper fip attach 209.177.91.57 dice-game
+```
+
+#### Remove
+
+```bash
+#!/bin/bash
+
+hyper stop dice-game
+hyper rm dice-game
+hyper rmi tatecarson/dice-game
+```
